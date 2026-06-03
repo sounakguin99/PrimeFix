@@ -76,7 +76,7 @@ export default function Home() {
                 Get your vehicle fixed at home
               </h1>
               <Link
-                href="/book"
+                href="/categories"
                 className="inline-flex w-fit items-center gap-3 px-8 py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-300"
               >
                 Book a Mechanic <ArrowRight className="w-5 h-5" />
@@ -169,7 +169,7 @@ export default function Home() {
               </div>
               <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4">
                 <Link
-                  href="/book"
+                  href="/services"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-lg hover:scale-105 active:scale-95 duration-300 text-base"
                 >
                   Book Service Now <ArrowRight className="w-5 h-5" />
@@ -364,7 +364,7 @@ export default function Home() {
             way they manage their automotive and home maintenance.
           </p>
           <Link
-            href="/book"
+            href="/services"
             className="relative z-10 inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-blue font-bold text-lg rounded-full hover:bg-brand-cyan-light hover:scale-105 active:scale-95 transition-all shadow-xl"
           >
             Book a Service <ArrowRight className="w-5 h-5" />
