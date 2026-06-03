@@ -1,7 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowLeft, Scale } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Terms of Service – Usage Agreement",
+  description:
+    "Read the PrimeFix Terms of Service. Understand your rights and obligations when using our doorstep car repair, bike servicing, and home maintenance booking platform.",
+  alternates: {
+    canonical: "https://www.primefix.in/terms",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function TermsOfService() {
   return (

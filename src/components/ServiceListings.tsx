@@ -15,14 +15,18 @@ interface Service {
 
 interface ServiceListingsProps {
   initialServices: Service[];
+  categories?: { name: string; slug: string }[];
 }
 
-export default function ServiceListings({ initialServices }: ServiceListingsProps) {
+export default function ServiceListings({ initialServices, categories }: ServiceListingsProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("default");
-  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const sortDropdownRef = useRef<HTMLDivElement>(null);
+  const categoryDropdownRef = useRef<HTMLDivElement>(null);
 
   const observer = useRef<IntersectionObserver | null>(null);
   const observerRef = useCallback((node: HTMLDivElement | null) => {
@@ -43,12 +47,15 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
   // Reset visible count when filters change
   useEffect(() => {
     setVisibleCount(9);
-  }, [searchQuery, sortBy, initialServices]);
+  }, [searchQuery, sortBy, selectedCategory, initialServices]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target as Node)) {
+        setIsSortOpen(false);
+      }
+      if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target as Node)) {
+        setIsCategoryOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -65,15 +72,21 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
 
   const currentOption = sortOptions.find(opt => opt.value === sortBy) || sortOptions[0];
 
+  const currentCategoryName = selectedCategory === "all" 
+    ? "All Categories" 
+    : categories?.find(c => c.slug === selectedCategory)?.name || "All Categories";
+
   const filteredAndSortedServices = useMemo(() => {
-    // 1. Filter by search query
+    // 1. Filter by search query and category
     let result = initialServices.filter((service) => {
       const searchLower = searchQuery.toLowerCase();
-      return (
-        service.title.toLowerCase().includes(searchLower) ||
+      const matchesSearch = service.title.toLowerCase().includes(searchLower) ||
         service.subtitle.toLowerCase().includes(searchLower) ||
-        (service.description && service.description.toLowerCase().includes(searchLower))
-      );
+        (service.description && service.description.toLowerCase().includes(searchLower));
+        
+      const matchesCategory = selectedCategory === "all" || service.categoryId === selectedCategory;
+      
+      return matchesSearch && matchesCategory;
     });
 
     // 2. Sort
@@ -92,7 +105,7 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
     }
 
     return result;
-  }, [initialServices, searchQuery, sortBy]);
+  }, [initialServices, searchQuery, sortBy, selectedCategory]);
 
   return (
     <div className="w-full">
@@ -109,11 +122,11 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
             </span>
           </div>
 
-          {/* Right Side: Search and Sort Controls */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto flex-1 md:max-w-2xl md:justify-end">
+          {/* Right Side: Search, Category, and Sort Controls */}
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full md:w-auto flex-1 md:max-w-3xl md:justify-end">
             
             {/* Search Input */}
-            <div className="relative w-full sm:w-80">
+            <div className="relative w-full sm:flex-1 sm:min-w-[200px]">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
@@ -126,22 +139,72 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
               />
             </div>
 
+            {/* Category Dropdown (Conditional) */}
+            {categories && (
+              <div className="relative w-full sm:w-48 shrink-0" ref={categoryDropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                  className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue focus:bg-white transition-all shadow-inner outline-none text-left select-none cursor-pointer font-semibold text-gray-700"
+                >
+                  <span className="truncate">{currentCategoryName}</span>
+                  <ChevronDown className={`ml-2 h-4 w-4 text-gray-400 shrink-0 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {isCategoryOpen && (
+                  <div className="absolute right-0 mt-2 w-full max-h-60 overflow-y-auto bg-white border border-gray-100 rounded-xl shadow-lg py-1.5 z-30 animate-in fade-in slide-in-from-top-1 duration-100 custom-scrollbar">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory("all");
+                        setIsCategoryOpen(false);
+                      }}
+                      className={`flex items-center w-full px-4 py-2.5 text-sm text-left transition-colors cursor-pointer ${
+                        selectedCategory === "all"
+                          ? "bg-brand-blue/5 text-brand-blue font-medium"
+                          : "text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      All Categories
+                    </button>
+                    {categories.map((cat) => (
+                      <button
+                        key={cat.slug}
+                        type="button"
+                        onClick={() => {
+                          setSelectedCategory(cat.slug);
+                          setIsCategoryOpen(false);
+                        }}
+                        className={`flex items-center w-full px-4 py-2.5 text-sm text-left transition-colors cursor-pointer ${
+                          selectedCategory === cat.slug
+                            ? "bg-brand-blue/5 text-brand-blue font-medium"
+                            : "text-gray-700 hover:bg-gray-50"
+                        }`}
+                      >
+                        {cat.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Sort Dropdown */}
-            <div className="relative w-full sm:w-48 shrink-0" ref={dropdownRef}>
+            <div className="relative w-full sm:w-48 shrink-0" ref={sortDropdownRef}>
               <button
                 type="button"
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setIsSortOpen(!isSortOpen)}
                 className="flex items-center justify-between w-full pl-11 pr-8 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-brand-blue focus:border-brand-blue focus:bg-white transition-all shadow-inner outline-none text-left select-none cursor-pointer font-semibold text-gray-700"
               >
                 <span className="truncate">{currentOption.label}</span>
-                <ChevronDown className={`absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 transition-transform duration-200 ${isSortOpen ? 'rotate-180' : ''}`} />
               </button>
               
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <SlidersHorizontal className="h-5 w-5 text-gray-400" />
               </div>
 
-              {isOpen && (
+              {isSortOpen && (
                 <div className="absolute right-0 mt-2 w-full bg-white border border-gray-100 rounded-xl shadow-lg py-1.5 z-30 animate-in fade-in slide-in-from-top-1 duration-100">
                   {sortOptions.map((option) => {
                     const Icon = option.icon;
@@ -151,7 +214,7 @@ export default function ServiceListings({ initialServices }: ServiceListingsProp
                         type="button"
                         onClick={() => {
                           setSortBy(option.value);
-                          setIsOpen(false);
+                          setIsSortOpen(false);
                         }}
                         className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-left transition-colors cursor-pointer ${
                           sortBy === option.value

@@ -1,7 +1,32 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { ShieldCheck, Award, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "About Us – Our Mission, Values & Story",
+  description:
+    "Learn about PrimeFix – India's trusted doorstep service platform. With 50K+ services delivered, 100+ certified experts, and a 4.9/5 average rating, we bring professional car repair, bike maintenance, and home services directly to your door.",
+  keywords: [
+    "about PrimeFix",
+    "doorstep service company India",
+    "certified car mechanics",
+    "professional home services",
+    "trusted service platform",
+    "vehicle maintenance experts",
+  ],
+  alternates: {
+    canonical: "https://www.primefix.in/about",
+  },
+  openGraph: {
+    title: "About PrimeFix – Redefining Doorstep Services",
+    description:
+      "50K+ services delivered, 100+ certified experts, 4.9/5 rating. Discover how PrimeFix is revolutionizing home and vehicle maintenance in India.",
+    url: "https://www.primefix.in/about",
+    images: ["/about_hero_1780499264761.png"],
+  },
+};
 
 export default function AboutUs() {
   return (

@@ -1,6 +1,36 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PrimeFix – Doorstep Car Repair, Bike Service & Home Maintenance | Book Online",
+  description:
+    "Get your car, bike & home serviced at your doorstep by certified experts. Book car repair, bike maintenance, electrician, plumber, painter & carpenter online. Transparent pricing, genuine OEM parts & service warranty. Available in Nanded, Kolkata & 10+ cities.",
+  keywords: [
+    "doorstep car repair India",
+    "book mechanic online",
+    "bike service at home",
+    "home electrician service",
+    "plumber near me",
+    "on-demand home maintenance",
+    "PrimeFix booking",
+    "car battery replacement at home",
+    "mobile mechanic service",
+    "professional home cleaning",
+  ],
+  alternates: {
+    canonical: "https://www.primefix.in",
+  },
+  openGraph: {
+    title: "PrimeFix – Doorstep Car Repair, Bike Service & Home Maintenance",
+    description:
+      "Book certified mechanics & home service professionals at your doorstep. Transparent pricing, genuine parts & service warranty.",
+    url: "https://www.primefix.in",
+    images: ["/car_engine_banner_1780416961037.png"],
+  },
+};
+
 import ServiceCard from "@/components/ServiceCard";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";

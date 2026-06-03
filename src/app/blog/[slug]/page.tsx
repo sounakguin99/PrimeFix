@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArrowLeft, Clock, User, Calendar, BookOpen } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/data";
 
@@ -9,6 +10,50 @@ interface BlogPostPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The blog post you are looking for could not be found.",
+    };
+  }
+
+  return {
+    title: `${post.title} – PrimeFix Blog`,
+    description: post.excerpt,
+    keywords: [
+      post.category,
+      "PrimeFix blog",
+      "service tips",
+      ...post.title.toLowerCase().split(" ").filter((w) => w.length > 3),
+    ],
+    authors: [{ name: post.author }],
+    alternates: {
+      canonical: `https://www.primefix.in/blog/${slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `https://www.primefix.in/blog/${slug}`,
+      images: [post.image],
+      publishedTime: post.date,
+      authors: [post.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

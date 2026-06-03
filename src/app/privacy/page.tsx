@@ -1,7 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy – How We Protect Your Data",
+  description:
+    "Read PrimeFix's Privacy Policy. Learn how we collect, use, and protect your personal information when you use our doorstep car repair, bike service, and home maintenance platform.",
+  alternates: {
+    canonical: "https://www.primefix.in/privacy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function PrivacyPolicy() {
   return (

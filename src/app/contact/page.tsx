@@ -1,6 +1,31 @@
 import React from 'react';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: "Contact Us – Get Support & Assistance",
+  description:
+    "Need help with a booking or have a question? Contact PrimeFix support team available 7 days a week, 8 AM to 9 PM. Call +91 98765 43210 or email support@mrtecy.com. Visit our Kolkata office.",
+  keywords: [
+    "contact PrimeFix",
+    "PrimeFix support",
+    "customer service doorstep repair",
+    "book mechanic contact",
+    "PrimeFix phone number",
+    "PrimeFix email",
+  ],
+  alternates: {
+    canonical: "https://www.primefix.in/contact",
+  },
+  openGraph: {
+    title: "Contact PrimeFix – We're Here to Help",
+    description:
+      "Get in touch with PrimeFix support. Available 7 days a week. Call, email, or visit us.",
+    url: "https://www.primefix.in/contact",
+    images: ["/contact_hero_1780500341763.png"],
+  },
+};
 
 export default function ContactUs() {
   return (

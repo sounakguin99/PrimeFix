@@ -12,8 +12,8 @@ export default function Footer() {
               <Image
                 src="/primefix_logo.png"
                 alt="PrimeFix Logo"
-                width={40}
-                height={40}
+                width={80}
+                height={80}
                 className="object-contain"
               />
               <span className="text-2xl font-bold text-brand-blue tracking-tight">
@@ -154,7 +154,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/careers"
                   className="hover:text-brand-blue transition-colors"
                 >
                   Careers
@@ -194,9 +194,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-100 mt-12 pt-8 flex items-center justify-between">
+        <div className="border-t border-gray-100 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
             © 2026 PrimeFix. All rights reserved.
+          </p>
+          <p className="text-sm text-gray-400 text-center md:text-right">
+            Designed and developed by{" "}
+            <a
+              href="https://www.sounakguin.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-blue hover:underline font-medium"
+            >
+              Sounak Guin
+            </a>
           </p>
         </div>
       </div>

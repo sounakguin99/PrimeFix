@@ -27,8 +27,8 @@ export default function Header() {
             <Image
               src="/primefix_logo.png"
               alt="PrimeFix Logo"
-              width={32}
-              height={32}
+              width={64}
+              height={64}
               className="object-contain"
             />
             <span className="text-xl font-extrabold text-brand-blue tracking-tight">PrimeFix</span>
@@ -49,8 +49,8 @@ export default function Header() {
               <Image
                 src="/primefix_logo.png"
                 alt="PrimeFix Logo"
-                width={40}
-                height={40}
+                width={72}
+                height={72}
                 className="object-contain"
               />
             </div>

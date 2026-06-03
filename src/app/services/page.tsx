@@ -14,7 +14,7 @@ export default function ServicesPage() {
       : ALL_SERVICES.filter((s) => s.categoryId === selectedCategory);
 
   return (
-    <div className="w-full bg-gray-50 pb-20">
+    <div className="w-full bg-slate-50/50 pb-20">
       {/* Hero Section */}
       <section className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         <Image
@@ -24,9 +24,9 @@ export default function ServicesPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/90 via-brand-blue/70 to-brand-blue/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/90 via-brand-blue/75 to-brand-blue/95"></div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-light-blue font-bold text-sm mb-6 uppercase tracking-wider">
             Directory
           </span>
@@ -40,36 +40,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <div className="w-full mx-auto px-4 md:px-6 py-12">
-        {/* Filter Pills */}
-        <div className="flex overflow-x-auto pb-4 mb-8 gap-3 no-scrollbar">
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-6 py-2.5 rounded-full whitespace-nowrap font-bold text-sm transition-all duration-300 ${
-              selectedCategory === "all"
-                ? "bg-brand-blue text-white shadow-md shadow-brand-blue/20"
-                : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-100"
-            }`}
-          >
-            All Services
-          </button>
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.slug}
-              onClick={() => setSelectedCategory(cat.slug)}
-              className={`px-6 py-2.5 rounded-full whitespace-nowrap font-bold text-sm transition-all duration-300 ${
-                selectedCategory === cat.slug
-                  ? "bg-brand-blue text-white shadow-md shadow-brand-blue/20"
-                  : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-100"
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Services Grid with Search/Sort */}
-        <ServiceListings initialServices={filteredServices} />
+      {/* Main Content Area: Shifted Up */}
+      <div className="w-full mx-auto px-4 md:px-6 -mt-10 relative z-20">
+        {/* Services Grid with Search/Sort/Category Dropdowns */}
+        <ServiceListings initialServices={ALL_SERVICES} categories={CATEGORIES} />
       </div>
     </div>
   );

@@ -1,7 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowLeft, RotateCcw } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Refund & Cancellation Policy",
+  description:
+    "Understand PrimeFix's refund and cancellation policy. Learn about service cancellation windows, refund eligibility, processing times, and rescheduling options for car repair, bike service & home maintenance bookings.",
+  alternates: {
+    canonical: "https://www.primefix.in/refund",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RefundPolicy() {
   return (

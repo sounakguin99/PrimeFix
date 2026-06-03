@@ -1,7 +1,34 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { BLOG_POSTS } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: "Blog – Car Maintenance Tips, Home Safety & Service Guides",
+  description:
+    "Read expert articles on car maintenance, bike care, electrical safety, home improvement tips and industry trends. Get professional insights from PrimeFix certified mechanics and service experts.",
+  keywords: [
+    "car maintenance tips",
+    "bike care guide",
+    "home electrical safety",
+    "vehicle servicing blog",
+    "mechanic advice India",
+    "PrimeFix blog",
+    "home improvement tips",
+    "oil change signs",
+  ],
+  alternates: {
+    canonical: "https://www.primefix.in/blog",
+  },
+  openGraph: {
+    title: "PrimeFix Blog – Expert Insights & Service Guides",
+    description:
+      "Tips, guides, and industry news for maintaining your vehicles and home. Expert advice from certified professionals.",
+    url: "https://www.primefix.in/blog",
+    images: ["/blog_hero_1780500323177.png"],
+  },
+};
 
 export default function Blog() {
   return (

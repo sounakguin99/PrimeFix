@@ -1,7 +1,79 @@
 import React from "react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ALL_SERVICES } from "@/lib/data";
 import ServiceListings from "@/components/ServiceListings";
+
+// SEO metadata for each category
+const CATEGORY_SEO: Record<string, { title: string; description: string; keywords: string[] }> = {
+  "for-you": {
+    title: "Personalized Services Tailored For You",
+    description: "Get handpicked doorstep services tailored to your daily needs. Book customized car, bike, home repair & maintenance services online with PrimeFix.",
+    keywords: ["personalized home services", "custom vehicle maintenance", "tailored doorstep service"],
+  },
+  car: {
+    title: "Car Repair & Services at Your Doorstep",
+    description: "Book professional car repair services at home – alternator check, battery replacement, battery jump start & more. Certified mechanics, genuine OEM parts, transparent pricing.",
+    keywords: ["car repair at home", "doorstep car service", "car battery replacement", "car alternator check", "mobile car mechanic India"],
+  },
+  bike: {
+    title: "Bike Maintenance & Service at Home",
+    description: "Keep your motorcycle in top condition with PrimeFix doorstep bike service. Full general service, oil change, chain lubrication & safety inspection by certified mechanics.",
+    keywords: ["bike service at home", "motorcycle maintenance", "doorstep bike repair", "bike oil change service"],
+  },
+  electrician: {
+    title: "Professional Electrician Services at Home",
+    description: "Book certified electricians for switchboard repair, socket fixing, wiring inspection & more. Safe, reliable electrical services at your doorstep with PrimeFix.",
+    keywords: ["electrician near me", "home electrician service", "switchboard repair", "electrical wiring service"],
+  },
+  plumbing: {
+    title: "Expert Plumbing Services at Your Doorstep",
+    description: "Fix leaky taps, clear pipe blockages, repair seals & optimize water pressure. Professional plumbing services booked online with PrimeFix.",
+    keywords: ["plumber near me", "tap repair service", "pipe blockage clearing", "plumbing services at home"],
+  },
+  cleaning: {
+    title: "Professional Home Cleaning Services",
+    description: "Book deep sofa cleaning, full home sanitization & dust allergen removal. Professional cleaning services at your doorstep with PrimeFix.",
+    keywords: ["sofa cleaning service", "home deep cleaning", "professional cleaning near me"],
+  },
+  painting: {
+    title: "Quality Interior & Exterior Painting Services",
+    description: "Transform your spaces with premium wall painting. Surface preparation, crack filling & professional paint application at your doorstep.",
+    keywords: ["interior wall painting", "home painting service", "professional painter near me"],
+  },
+  carpentry: {
+    title: "Professional Carpentry & Furniture Services",
+    description: "Expert furniture assembly, wardrobe alignment & custom woodwork. Professional carpentry services at your doorstep with PrimeFix.",
+    keywords: ["furniture assembly service", "carpentry near me", "professional carpenter"],
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const seo = CATEGORY_SEO[slug] || {
+    title: "Our Services",
+    description: "Explore our wide range of professional doorstep services with PrimeFix.",
+    keywords: ["doorstep services", "PrimeFix services"],
+  };
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+    alternates: {
+      canonical: `https://www.primefix.in/category/${slug}`,
+    },
+    openGraph: {
+      title: `${seo.title} | PrimeFix`,
+      description: seo.description,
+      url: `https://www.primefix.in/category/${slug}`,
+    },
+  };
+}
 
 // Detailed data for each category
 const CATEGORY_DATA: Record<
