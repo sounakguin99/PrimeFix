@@ -122,9 +122,17 @@ export default function ContactUs() {
       </div>
 
       {/* Big Map at Bottom */}
-      <div className="w-full h-[600px] bg-gray-200 rounded-2xl overflow-hidden flex items-center justify-center relative shadow-sm border border-gray-100">
-        <div className="absolute inset-0 opacity-60 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Kolkata,India&zoom=13&size=1200x400&maptype=roadmap')] bg-cover bg-center"></div>
-        <span className="relative z-10 bg-white px-6 py-3 rounded-xl shadow-md font-bold text-gray-800 text-lg border border-gray-100">Interactive Map View</span>
+      <div className="w-full h-[500px] md:h-[600px] bg-gray-200 rounded-2xl overflow-hidden relative shadow-sm border border-gray-100 mb-8">
+        <iframe 
+          src="https://maps.google.com/maps?q=Kolkata,%20West%20Bengal&t=&z=12&ie=UTF8&iwloc=&output=embed" 
+          width="100%" 
+          height="100%" 
+          style={{ border: 0 }} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          className="absolute inset-0"
+        ></iframe>
       </div>
     </div>
     </div>

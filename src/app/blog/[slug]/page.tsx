@@ -133,18 +133,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Sidebar */}
         <aside className="space-y-8">
           
-          {/* About Section */}
-          <div className="bg-brand-blue text-white rounded-3xl p-6 shadow-md relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-12 -mt-12 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
-            <h3 className="font-extrabold text-xl mb-4 relative z-10">Need Professional Assistance?</h3>
-            <p className="text-brand-light-blue text-sm leading-relaxed mb-6 relative z-10">
-              Get certified experts straight to your doorstep. From car repairs to carpentry and electrical safety checks.
-            </p>
+          {/* Service CTA */}
+          <div className="bg-brand-blue rounded-3xl p-8 text-center shadow-lg relative overflow-hidden mt-8 group">
+            <div className="absolute top-0 right-0 -mr-10 -mt-10 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all duration-500"></div>
+            <h3 className="text-xl font-bold text-white mb-3 relative z-10">Need Professional Help?</h3>
+            <p className="text-brand-light-blue text-sm mb-6 relative z-10">Our certified mechanics are available for doorstep service.</p>
             <Link 
-              href="/book" 
-              className="inline-flex items-center justify-center w-full py-3 bg-white text-brand-blue font-bold rounded-xl hover:bg-brand-cyan-light transition-colors text-sm shadow-sm"
+              href="/services" 
+              className="w-full inline-flex justify-center items-center gap-2 px-6 py-3.5 bg-white text-brand-blue font-bold rounded-xl hover:bg-brand-cyan-light transition-all shadow-md relative z-10"
             >
-              Book a Service
+              Book Service
             </Link>
           </div>
 

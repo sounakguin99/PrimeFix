@@ -168,7 +168,7 @@ export default function AboutUs() {
           <p className="relative z-10 text-brand-light-blue text-lg mb-10 max-w-2xl mx-auto">
             Join thousands of satisfied customers who have revolutionized the way they manage their automotive and home maintenance.
           </p>
-          <Link href="/book" className="relative z-10 inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-blue font-bold text-lg rounded-full hover:bg-brand-cyan-light hover:scale-105 active:scale-95 transition-all shadow-xl">
+          <Link href="/services" className="relative z-10 inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-blue font-bold text-lg rounded-full hover:bg-brand-cyan-light hover:scale-105 active:scale-95 transition-all shadow-xl">
             Book a Service <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
