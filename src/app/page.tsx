@@ -68,18 +68,19 @@ export default function Home() {
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/95 via-brand-blue/80 to-transparent"></div>
 
-            <div className="absolute inset-0 pl-10 flex flex-col justify-center max-w-2xl z-10">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white font-bold text-sm mb-6 w-fit backdrop-blur-md border border-white/20 shadow-sm">
+            <div className="absolute inset-0 px-6 md:pl-16 md:pr-10 flex flex-col justify-center max-w-xl md:max-w-2xl z-10">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white font-bold text-xs sm:text-sm mb-4 md:mb-6 w-fit backdrop-blur-md border border-white/20 shadow-sm">
                 Doorstep Service
               </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight text-balance">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6 leading-tight tracking-tight text-balance">
                 Get your vehicle fixed at home
               </h1>
               <Link
                 href="/categories"
-                className="inline-flex w-fit items-center gap-3 px-8 py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-300"
+                className="inline-flex w-fit items-center gap-2 sm:gap-3 px-5 py-2.5 sm:px-8 sm:py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 duration-300 text-sm sm:text-base group"
               >
-                Book a Mechanic <ArrowRight className="w-5 h-5" />
+                Book a Mechanic{" "}
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -100,14 +101,14 @@ export default function Home() {
             </div>
             <Link
               href="/categories"
-              className="inline-flex w-fit items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 mt-8 group text-sm cursor-pointer"
+              className="hidden md:inline-flex w-fit items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 group text-sm cursor-pointer"
             >
               Explore All{" "}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
             {displayedCategories.map((cat, idx) => (
               <Link
                 href={`/category/${cat.slug}`}
@@ -127,17 +128,28 @@ export default function Home() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-4 sm:p-5 flex flex-row items-center justify-between flex-1 relative bg-white group-hover:bg-brand-blue transition-colors duration-500">
-                  <h3 className="font-extrabold text-gray-900 text-sm sm:text-base tracking-tight group-hover:text-white transition-colors duration-500">
+                <div className="p-3 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between flex-1 relative bg-white group-hover:bg-brand-blue transition-colors duration-500 gap-3 sm:gap-0">
+                  <h3 className="font-extrabold text-gray-900 text-sm sm:text-base tracking-tight group-hover:text-white transition-colors duration-500 line-clamp-1">
                     {cat.name}
                   </h3>
-                  <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-brand-blue bg-blue-50/80 px-3.5 py-1.5 rounded-full group-hover:bg-white/20 group-hover:text-white transition-all duration-500 shrink-0">
+                  <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-brand-blue bg-blue-50/80 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full group-hover:bg-white/20 group-hover:text-white transition-all duration-500 shrink-0 self-start sm:self-auto whitespace-nowrap">
                     <span>Book Now</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
             ))}
+          </div>
+
+          {/* Mobile view Explore All button */}
+          <div className="flex justify-center mt-8 md:hidden">
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 group text-sm cursor-pointer"
+            >
+              Explore All{" "}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
@@ -155,7 +167,7 @@ export default function Home() {
                 <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/20 text-white font-bold text-xs uppercase tracking-wider mb-4 backdrop-blur-sm border border-white/10 shadow-sm">
                   Limited Time Discount
                 </span>
-                <h3 className="text-2xl md:text-4xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight leading-tight">
                   First Time Booking? Get Flat 20% Off!
                 </h3>
                 <p className="text-brand-light-blue text-sm md:text-base font-medium leading-relaxed mb-0">
@@ -167,16 +179,17 @@ export default function Home() {
                   during booking.
                 </p>
               </div>
-              <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4">
+              <div className="w-full md:w-auto shrink-0 flex flex-col sm:flex-row items-center gap-4">
                 <Link
                   href="/services"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-lg hover:scale-105 active:scale-95 duration-300 text-base"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 md:px-8 md:py-4 bg-white text-brand-blue font-bold rounded-full hover:bg-brand-cyan-light transition-all shadow-lg hover:scale-105 active:scale-95 duration-300 text-sm md:text-base whitespace-nowrap group"
                 >
-                  Book Service Now <ArrowRight className="w-5 h-5" />
+                  Book Service Now{" "}
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/services"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border-2 border-white/50 text-white font-bold rounded-full hover:bg-white/10 hover:border-white transition-all text-base"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 md:px-6 md:py-4 bg-transparent border-2 border-white/50 text-white font-bold rounded-full hover:bg-white/10 hover:border-white transition-all text-sm md:text-base whitespace-nowrap"
                 >
                   View Services
                 </Link>
@@ -189,7 +202,7 @@ export default function Home() {
       {/* Recommended Services Section */}
       <section className="py-8">
         <div className="w-full mx-auto px-2 md:px-4">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
                 Recomended Services
@@ -200,13 +213,14 @@ export default function Home() {
             </div>
             <Link
               href="/services"
-              className="inline-flex w-fit items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 mt-8 group text-sm cursor-pointer"
+              className="hidden md:inline-flex w-fit items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 group text-sm cursor-pointer"
             >
-              View All <ArrowRight className="w-4 h-4" />
+              View All{" "}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {RECOMMENDED_SERVICES.map((service, idx) => (
               <ServiceCard
                 key={idx}
@@ -216,6 +230,17 @@ export default function Home() {
                 imageSrc={service.image}
               />
             ))}
+          </div>
+
+          {/* Mobile view View All button */}
+          <div className="flex justify-center mt-8 md:hidden">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2.5 px-6 py-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-full transition-all shadow-sm hover:shadow-md active:scale-95 duration-200 group text-sm cursor-pointer"
+            >
+              View All{" "}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
@@ -325,7 +350,7 @@ export default function Home() {
                 </div>
 
                 {/* Floating Stat Widget */}
-                <div className="absolute left-[-1.5rem] bottom-[15%] bg-white/95 backdrop-blur-md border border-gray-100 p-4 rounded-2xl shadow-xl flex items-center gap-3 z-30 transition-transform duration-300 hover:scale-105 select-none">
+                <div className="absolute left-2 sm:-left-6 bottom-[10%] sm:bottom-[15%] bg-white/95 backdrop-blur-md border border-gray-100 p-3 sm:p-4 rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3 z-30 transition-transform duration-300 hover:scale-105 select-none max-w-[calc(100%-1rem)] sm:max-w-none">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500 shrink-0">
                     <Star className="w-6 h-6 fill-amber-400 text-amber-400" />
                   </div>
@@ -356,7 +381,7 @@ export default function Home() {
           {/* Decorative background circle */}
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
 
-          <h2 className="relative z-10 text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
+          <h2 className="relative z-10 text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
             Ready to experience the difference?
           </h2>
           <p className="relative z-10 text-brand-light-blue text-lg mb-10 max-w-2xl mx-auto">

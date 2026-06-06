@@ -2,13 +2,15 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin, Bell, User, LogOut } from "lucide-react";
+import { MapPin, Bell, User, LogOut, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
   const { user, isLoggedIn, login, logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -22,20 +24,87 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
       {/* Mobile Header (Top bar) */}
       <div className="md:hidden">
-        <div className="flex items-center justify-between px-4 py-3.5">
-          <Link href="/" className="flex items-center gap-2">
+        <div className="flex items-center justify-between px-4 py-3.5 relative z-50 bg-white/95 backdrop-blur-md">
+          <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
             <Image
               src="/primefix_logo.png"
               alt="PrimeFix Logo"
-              width={64}
-              height={64}
-              className="object-contain"
+              width={40}
+              height={40}
+              className="object-contain shrink-0"
             />
-            <span className="text-xl font-extrabold text-brand-blue tracking-tight">PrimeFix</span>
+            <span className="text-lg sm:text-xl font-extrabold text-brand-blue tracking-tight shrink-0">
+              PrimeFix
+            </span>
           </Link>
-          <div className="flex items-center gap-1.5 bg-gray-50/80 px-3 py-1.5 rounded-full shadow-sm text-xs font-semibold text-gray-700 border border-gray-100">
-            <MapPin className="w-3.5 h-3.5 text-brand-blue" />
-            <span>Nanded</span>
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-1.5 bg-gray-50/80 px-3 py-1.5 rounded-full shadow-sm text-xs font-semibold text-gray-700 border border-gray-100">
+              <MapPin className="w-3.5 h-3.5 text-brand-blue" />
+              <span>Nanded</span>
+            </div>
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-1.5 -mr-1.5 text-gray-600 hover:text-brand-blue hover:bg-gray-100 rounded-full transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        <div className={`absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[500px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}>
+          <div className="px-4 py-4 flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-xl font-bold transition-colors ${
+                    isActive ? "bg-brand-blue/5 text-brand-blue" : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            
+            <div className="h-px bg-gray-100 my-2"></div>
+            
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <User className="w-5 h-5 text-gray-400" />
+                  My Profile
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-red-600 hover:bg-red-50 transition-colors text-left"
+                >
+                  <LogOut className="w-5 h-5 text-red-400" />
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  login();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 mt-2 bg-brand-blue text-white rounded-xl hover:bg-blue-700 active:scale-95 transition-all font-bold"
+              >
+                <User className="w-5 h-5" />
+                Sign In
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -106,8 +175,12 @@ export default function Header() {
                   {/* Dropdown Menu with Slide & Fade Anim */}
                   <div className="absolute right-0 top-full mt-1 w-52 bg-white border border-gray-100 rounded-2xl shadow-xl py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right scale-95 group-hover:scale-100 z-50">
                     <div className="px-4 py-2 border-b border-gray-100 mb-1.5">
-                      <p className="text-[10px] text-gray-400 font-bold tracking-wider uppercase">Signed in as</p>
-                      <p className="text-sm font-extrabold text-gray-800 truncate mt-0.5">{user.name}</p>
+                      <p className="text-[10px] text-gray-400 font-bold tracking-wider uppercase">
+                        Signed in as
+                      </p>
+                      <p className="text-sm font-extrabold text-gray-800 truncate mt-0.5">
+                        {user.name}
+                      </p>
                       <span className="inline-block mt-1 text-[10px] font-bold text-brand-blue bg-brand-light-blue px-2.5 py-0.5 rounded-full">
                         {user.tier}
                       </span>

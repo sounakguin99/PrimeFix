@@ -60,19 +60,19 @@ export default function AboutUs() {
         <div className="bg-white rounded-3xl shadow-xl shadow-brand-blue/5 border border-gray-100 p-8 md:p-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-gray-100 text-center">
             <div className="px-4">
-              <div className="text-4xl font-extrabold text-brand-blue mb-2">50K+</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-brand-blue mb-2">50K+</div>
               <div className="text-sm text-gray-500 font-medium">Services Delivered</div>
             </div>
             <div className="px-4">
-              <div className="text-4xl font-extrabold text-brand-blue mb-2">100+</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-brand-blue mb-2">100+</div>
               <div className="text-sm text-gray-500 font-medium">Certified Experts</div>
             </div>
             <div className="px-4">
-              <div className="text-4xl font-extrabold text-brand-blue mb-2">4.9/5</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-brand-blue mb-2">4.9/5</div>
               <div className="text-sm text-gray-500 font-medium">Average Rating</div>
             </div>
             <div className="px-4">
-              <div className="text-4xl font-extrabold text-brand-blue mb-2">10+</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-brand-blue mb-2">10+</div>
               <div className="text-sm text-gray-500 font-medium">Cities Covered</div>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function AboutUs() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {/* Value 1 */}
-            <div className="bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
+            <div className="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
               <div className="w-20 h-20 bg-brand-light-blue rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue transition-colors duration-300">
                 <ShieldCheck className="w-10 h-10 text-brand-blue group-hover:text-white transition-colors duration-300" />
               </div>
@@ -138,7 +138,7 @@ export default function AboutUs() {
             </div>
             
             {/* Value 2 */}
-            <div className="bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
+            <div className="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
               <div className="w-20 h-20 bg-brand-light-blue rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue transition-colors duration-300">
                 <Award className="w-10 h-10 text-brand-blue group-hover:text-white transition-colors duration-300" />
               </div>
@@ -147,7 +147,7 @@ export default function AboutUs() {
             </div>
             
             {/* Value 3 */}
-            <div className="bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
+            <div className="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
               <div className="w-20 h-20 bg-brand-light-blue rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue transition-colors duration-300">
                 <Clock className="w-10 h-10 text-brand-blue group-hover:text-white transition-colors duration-300" />
               </div>

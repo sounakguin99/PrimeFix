@@ -166,7 +166,7 @@ export default function BookingsPage() {
                 className="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden"
               >
                 {/* Header of Card */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50 bg-gray-50/30">
+                <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-50 bg-gray-50/30">
                   <span className="text-xs font-bold text-gray-500 tracking-wider">
                     {booking.id}
                   </span>
@@ -190,7 +190,7 @@ export default function BookingsPage() {
                 </div>
 
                 {/* Body of Card */}
-                <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+                <div className="p-4 sm:p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
                   
                   {/* Image */}
                   <div className="relative w-full md:w-32 h-40 md:h-32 rounded-2xl overflow-hidden shrink-0 border border-gray-100">

@@ -95,13 +95,13 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Viewport Container */}
-        <div className="relative group/carousel px-4 sm:px-12">
+        <div className="relative group/carousel px-10 sm:px-12">
           {/* Slider track container */}
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-500 ease-in-out [--visible-cards:1] md:[--visible-cards:2] lg:[--visible-cards:3]"
               style={{
-                transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
+                transform: `translateX(calc(-100% * ${currentIndex} / var(--visible-cards)))`,
               }}
             >
               {TESTIMONIALS.map((test, idx) => (
@@ -138,42 +138,62 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Left Arrow Button */}
+          {/* Left Arrow Button (Desktop/Tablet Only) */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-md transition-all duration-300 hover:scale-110 active:scale-95 group-hover/carousel:opacity-100"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full items-center justify-center backdrop-blur-md shadow-md transition-all duration-300 hover:scale-110 active:scale-95 group-hover/carousel:opacity-100"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Right Arrow Button */}
+          {/* Right Arrow Button (Desktop/Tablet Only) */}
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-md transition-all duration-300 hover:scale-110 active:scale-95 group-hover/carousel:opacity-100"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full items-center justify-center backdrop-blur-md shadow-md transition-all duration-300 hover:scale-110 active:scale-95 group-hover/carousel:opacity-100"
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
 
-        {/* Indicator Dots */}
-        {maxIndex > 0 && (
-          <div className="flex justify-center gap-2.5 mt-8">
-            {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  currentIndex === idx
-                    ? "bg-white w-6 shadow-sm"
-                    : "bg-white/30 hover:bg-white/50 w-2.5"
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-        )}
+        {/* Indicator Dots & Mobile Nav Buttons */}
+        <div className="flex items-center justify-center gap-6 mt-8">
+          {/* Mobile Prev Button */}
+          <button
+            onClick={handlePrev}
+            className="md:hidden w-10 h-10 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-md active:scale-95 transition-all"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {maxIndex > 0 && (
+            <div className="flex justify-center gap-2.5">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    currentIndex === idx
+                      ? "bg-white w-6 shadow-sm"
+                      : "bg-white/30 hover:bg-white/50 w-2.5"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Mobile Next Button */}
+          <button
+            onClick={handleNext}
+            className="md:hidden w-10 h-10 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-md active:scale-95 transition-all"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -56,9 +56,9 @@ export default function ContactUs() {
 
       <div className="w-full mx-auto px-6 py-16">
 
-      <div className="grid lg:grid-cols-2 gap-12 mb-12">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
         {/* Contact Information (Left) */}
-        <div className="bg-brand-blue rounded-2xl p-8 text-white shadow-xl">
+        <div className="bg-brand-blue rounded-2xl p-6 md:p-8 text-white shadow-xl">
           <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
@@ -93,7 +93,7 @@ export default function ContactUs() {
         </div>
 
         {/* Contact Form (Right) */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
           <form className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">

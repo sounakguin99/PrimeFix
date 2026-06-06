@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
-import BottomNav from "@/components/BottomNav";
 import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({
@@ -23,7 +22,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "PrimeFix – Doorstep Car Repair, Bike Service & Home Maintenance | Book Online",
+    default:
+      "PrimeFix – Doorstep Car Repair, Bike Service & Home Maintenance | Book Online",
     template: "%s | PrimeFix",
   },
   description:
@@ -186,10 +186,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <head>
         <script
           type="application/ld+json"
@@ -204,14 +201,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-background relative pb-20 md:pb-0">
+      <body className="min-h-full flex flex-col bg-background relative overflow-x-hidden">
         <AuthProvider>
           <Header />
-          <main className="flex-1">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
-          <BottomNav />
         </AuthProvider>
       </body>
     </html>
